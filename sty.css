@@ -1,0 +1,1258 @@
+/* ==========================================================================
+   GLOBAL PARAMETERS & LIQUID GLASS LAYOUT
+   ========================================================================== */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    /* Soft, light monochromatic tech gradient */
+    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%); 
+    color: #1e293b; /* Deep slate gray for highly legible typography */
+}
+
+/* Header Navigation Row */
+#top-nav-header {
+    width: 100%;
+    max-width: 1100px;
+    margin: 20px auto 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+#about-toggle-btn {
+    /* Transparent Liquid Glass Button Architecture */
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #0284c7;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 10px 20px;
+    border-radius: 16px; /* Smooth squircle curve profile */
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 4px 16px rgba(148, 163, 184, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#about-toggle-btn:hover {
+    background: rgba(2, 132, 199, 0.1);
+    border-color: rgba(2, 132, 199, 0.4);
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   SIDE-BY-SIDE MAIN INTERFACE LAYOUT
+   ========================================================================== */
+#game-display-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 35px;
+    max-width: 1100px;
+    margin: 25px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+.game-left-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 480px;
+}
+
+/* Liquid Glass Core Dashboards */
+.players, #board-interface, #graph-container, .grid-matchbox-cell, #project-about-dropdown {
+    background: rgba(255, 255, 255, 0.35);                /* High-transparency crystal tint */
+    backdrop-filter: blur(16px) saturate(120%);           /* Distorts underlying shapes elegantly */
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.6);          /* Glossy highlighted light reflection rim */
+    border-radius: 24px;                                  /* Pronounced organic squircle configuration */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06);     /* Subtle depth shadow without looking heavy */
+    box-sizing: border-box;
+}
+
+.players {
+    width: 100%;
+    padding: 20px;
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.players i {
+    font-style: normal;
+    font-weight: bold;
+    color: #0284c7;
+}
+
+.players label {
+    margin-left: 12px;
+    color: #1e293b;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.speed {
+    margin-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    padding-top: 12px;
+}
+
+#board-interface {
+    width: 100%;
+    padding: 25px;
+}
+
+/* ==========================================================================
+   TIC-TAC-TOE INTERACTIVE CELL ARRAYS
+   ========================================================================== */
+table.board.large {
+    border-collapse: separate;
+    border-spacing: 12px; /* Gaps showcase underlying background transparency */
+}
+
+table.board.large td {
+    width: 75px;
+    height: 75px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 18px; /* Balanced interior cell squircle curves */
+    text-align: center;
+    vertical-align: middle;
+    font-size: 32px;
+    font-weight: bold;
+    color: #0f172a;
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), 0 4px 8px rgba(0,0,0,0.02);
+    transition: all 0.2s ease;
+}
+
+table.board.large td:has(input):hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: #0284c7;
+    transform: scale(1.02);
+}
+
+table.board.large input[type="submit"] {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* Score Tracker Displays */
+.wins {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #64748b;
+    text-align: center;
+    font-weight: 600;
+}
+
+.dis {
+    font-size: 26px;
+    font-weight: bold;
+    color: #0284c7;
+    margin-top: 4px;
+}
+
+.summary {
+    font-family: monospace;
+    font-size: 13px;
+    color: #64748b;
+    text-align: center;
+}
+
+/* ==========================================================================
+   LIVE PROGRESS GRAPH HOLDER
+   ========================================================================== */
+#graph-container {
+    flex: 1;
+    width: 100%;
+    max-width: 520px;
+    padding: 25px;
+}
+
+/* ==========================================================================
+   MATCHBOX STATE REINFORCEMENT SCHEMATICS
+   ========================================================================== */
+#brain-visualizer-table {
+    max-width: 1100px;
+    margin: 60px auto 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+#brain-visualizer-table h3 {
+    font-size: 20px;
+    color: #0284c7;
+    margin-bottom: 25px;
+    border-left: 4px solid #0284c7;
+    padding-left: 12px;
+}
+
+.matchbox-grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.grid-matchbox-cell {
+    padding: 25px;
+}
+
+.grid-matchbox-cell h4 {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Miniature Sub-State Matchboxes - Cohesive Glass Wrapper Border */
+table.board:not(.large) {
+    border-collapse: separate;
+    border-spacing: 6px; /* Slightly wider internal cell spacing */
+    background: rgba(255, 255, 255, 0.25); /* Ultra-translucent glass background for the whole 3x3 box */
+    border: 1px solid rgba(31, 65, 216, 0.61); /* Outer boundary ring wrapping the board */
+    border-top: 1px solid rgba(31, 65, 216, 0.61); /* Subtle gloss reflection highlight on top */
+    border-radius: 20px; /* Smooth matching squircle bounding contour */
+    padding: 5px; /* Breathing room between the inner cells and the outer boundary border */
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.02);
+    display: inline-block; /* Ensures the table wraps tightly around its internal cells */
+}
+
+table.board:not(.large) td {
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 8px; /* Smooth micro-squircle shapes */
+    text-align: center;
+    font-size: 12px;
+    color: #475569;
+}
+
+table.board:not(.large) td.num {
+    color: #0284c7;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   DROPDOWN PANEL WINDOW MODAL
+   ========================================================================== */
+#project-about-dropdown {
+    position: fixed;
+    top: 75px;
+    right: calc(50% - 550px + 20px);
+    width: 380px;
+    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 16px 48px rgba(31, 38, 135, 0.12);
+}
+
+#project-about-dropdown.hidden-panel {
+    display: none;
+    opacity: 0;
+    transform: translateY(-15px);
+}
+
+.dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+}
+
+.dropdown-header h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #0284c7;
+}
+
+.close-panel-btn {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    color: #64748b;
+    cursor: pointer;
+}
+
+.close-panel-btn:hover {
+    color: #0f172a;
+}
+
+.dropdown-body-content {
+    padding: 24px;
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+.dropdown-body-content h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: #0284c7;
+}
+
+.dropdown-body-content p {
+    margin: 0 0 20px 0;
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.inspiration-links .about-btn {
+    display: block;
+    text-align: center;
+    background: #0284c7;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 14px; /* Matches layout link squircles */
+    transition: background 0.2s ease;
+}
+
+.inspiration-links .about-btn:hover {
+    background: #0369a1;
+}
+
+/* ==========================================================================
+   PORTFOLIO UNIVERSAL LINK FOOTER
+   ========================================================================== */
+.portfolio-footer {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    color: #475569;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 80px;
+    box-sizing: border-box;
+}
+
+.portfolio-footer p {
+    margin: 0 0 14px 0;
+    font-size: 14px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #1e293b;
+    text-decoration: none;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 14px; /* Footer squircle cells */
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-links a:hover {
+    background: #ffffff;
+    border-color: #0284c7;
+    color: #0284c7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Mode Toggle Button Group Layout */
+.mode-toggle-group {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0 5px 0;
+}
+
+/* Hide native browser radio inputs completely */
+.mode-toggle-group input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Custom Glass Squircle Pill Buttons */
+.mode-btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 14px; /* Squircle design symmetry */
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mode-btn:hover {
+    background: rgba(255, 255, 255, 0.6);
+    color: #0f172a;
+}
+
+/* Active Highlight Glass State */
+.mode-btn.active-mode {
+    background: rgba(2, 132, 199, 0.15);
+    border-color: rgba(2, 132, 199, 0.5);
+    color: #0284c7;
+    box-shadow: inset 0 1px 2px rgba(2, 132, 199, 0.1);
+}
+
+/* ==========================================================================
+   LIQUID GLASS SLIDER STYLING
+   ========================================================================== */
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    outline: none;
+    margin-top: 10px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Slider Track Handle (Chrome, Safari, Edge, Opera) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; /* Rounded circular handle looks stunning against squircles */
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    border: 1px solid #0284c7;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3);
+    transition: all 0.15s ease-in-out;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    background: #ffffff;
+    transform: scale(1.15);
+    box-shadow: 0 4px 10px rgba(2, 132, 199, 0.4);
+}
+
+/* Slider Track Handle (Firefox compatibility) */
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid #0284c7;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3);
+    transition: all 0.15s ease-in-out;
+}
+
+.slider::-moz-range-thumb:hover {
+    background: #ffffff;
+    transform: scale(1.15);
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Ensure content takes all remaining space to push the footer permanently down */
+#game-display-container {
+    flex: 1 0 auto; 
+}
+
+.portfolio-footer {
+    flex-shrink: 0; /* Prevents the footer from breaking or squeezing on compact heights */
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 30px 20px;
+    box-sizing: border-box;
+}
+
+/* Hidden elements class state manager */
+.hidden-content {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.visible-content {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* ==========================================================================
+   LIQUID GLASS LOADING SCREEN STYLING
+   ========================================================================== */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Higher layer index to obscure interactive elements safely */
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Glass panel context card matching your existing layout elements */
+.loading-glass-card {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(20px) saturate(130%);
+    -webkit-backdrop-filter: blur(20px) saturate(130%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 40px;
+    width: 90%;
+    max-width: 440px;
+    border-radius: 28px; /* Smooth liquid squircle perimeter */
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Circular Framed Avatar Element */
+.inventor-avatar-frame {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 20px auto;
+    border-radius: 50%; /* Pure circle frame layout profile */
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    overflow: hidden;
+    background: #e2e8f0;
+}
+
+.inventor-avatar-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Keeps image coordinates scaled nicely without distortion */
+}
+
+.loading-glass-card h2 {
+    margin: 0 0 14px 0;
+    font-size: 22px;
+    color: #0284c7;
+}
+
+.loading-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #334155;
+    margin: 0 0 20px 0;
+}
+
+.loading-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.5);
+    margin: 20px 0;
+}
+
+.loading-credit {
+    font-size: 12px;
+    color: #475569;
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
+/* Tech Progress Track Bar Animation */
+.loading-progress-track {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.loading-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #0284c7;
+    border-radius: 10px;
+    /* Custom CSS step tracking sequence matching the exact 5s delay */
+    animation: fillProgress 5s linear forwards;
+}
+
+@keyframes fillProgress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+/* Make sure the form container spans the entire cell size */
+table.board.large td form {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+/* Make the invisible button expand to 100% of the cell, resetting appearance */
+table.board.large td input[type="submit"] {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: transparent;  /* Keeps your background squircle colors visible */
+    border: none;             /* Removes the default button outline */
+    outline: none;
+    cursor: pointer;          /* Changes mouse cursor to a pointer for UX */
+    padding: 0;
+    margin: 0;
+    -webkit-appearance: none; /* Prevents mobile browser default button styles */
+    appearance: none;
+}
+
+/* Container adjustments to position the button cleanly */
+#graph-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Liquid Glass Theme Button - Emerald Green Edition */
+.glass-scroll-btn {
+    background: rgba(16, 185, 129, 0.2); /* Soft translucent emerald glass tint */
+    color: #047857; /* Deep emerald text color for maximum contrast and legibility */
+    border: 1px solid rgba(52, 211, 153, 0.4); /* Glass highlighted rim */
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 16px; /* Perfect matching squircle curve profile */
+    cursor: pointer;
+    backdrop-filter: blur(12px) saturate(110%); /* Refracts backgrounds smoothly */
+    -webkit-backdrop-filter: blur(12px) saturate(110%);
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.1); /* Subtle depth shadow */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover and active pressing states */
+.glass-scroll-btn:hover {
+    background: rgba(16, 185, 129, 0.3); /* Slightly richer tint on hover */
+    border-color: rgba(16, 185, 129, 0.6);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.15);
+}
+
+.glass-scroll-btn:active {
+    transform: translateY(0);
+    background: rgba(16, 185, 129, 0.4);
+    box-shadow: inset 0 2px 4px rgba(4, 120, 87, 0.15);
+}
+
+/* Liquid Glass Instruction Panel */
+.engine-instructions-card {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-top: 20px;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 15px rgba(148, 163, 184, 0.1);
+    text-align: left;
+}
+
+.engine-instructions-card h4 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(30, 41, 59, 0.1);
+    padding-bottom: 6px;
+}
+
+.instruction-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ins-step h5 {
+    margin: 0 0 2px 0;
+    font-size: 12px;
+    color: #0284c7; /* Matching link/accent colors */
+    font-weight: 600;
+}
+
+.ins-step p {
+    margin: 0;
+    font-size: 12px;
+    color: #475569;
+    line-height: 1.4;
+}
+
+
+/* ==========================================================================
+           MOBILE & TABLET MATCHBOX FIXES
+           ========================================================================== */
+
+        /* --- Tablet: shrink matchbox cells & enable row wrapping --- */
+        @media (max-width: 840px) {
+
+            /* 1) Shrink the mini matchbox boards */
+            table.board:not(.large) {
+                border-spacing: 4px;
+                padding: 4px;
+                border-radius: 12px;
+            }
+
+            table.board:not(.large) td {
+                width: 24px !important;
+                height: 24px !important;
+                font-size: 10px !important;
+                border-radius: 5px !important;
+                border-width: 1px;
+            }
+
+            /* 2) Make the .moves table rows wrap their cells */
+            .moves {
+                display: block !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .moves tbody {
+                display: block !important;
+                width: 100% !important;
+            }
+
+            .moves tbody tr {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 6px !important;
+                padding: 4px 0 !important;
+                width: 100% !important;
+            }
+
+            .moves tbody tr td.board {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                flex: 0 0 auto !important;
+                padding: 0 !important;
+                border: none !important;
+                background: transparent !important;
+                box-shadow: none !important;
+            }
+
+            /* 3) Prevent overflow inside grid cells */
+            .grid-matchbox-cell {
+                overflow: hidden !important;
+                padding: 15px !important;
+            }
+
+            .grid-matchbox-cell>div {
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+                padding: 2px 0 !important;
+                max-width: 100% !important;
+            }
+
+            .grid-matchbox-cell>div center {
+                display: block !important;
+                max-width: 100% !important;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+            }
+
+            /* 4) The outer brain container should not overflow */
+            #brain-visualizer-table {
+                max-width: 100% !important;
+                padding: 0 12px !important;
+                overflow: hidden !important;
+            }
+
+            /* 5) Collapse the 2‑column grid to 1 column on tablet */
+            .matchbox-grid-wrapper {
+                grid-template-columns: 1fr !important;
+                gap: 18px !important;
+            }
+
+            /* 6) Keep the game board & graph side‑by‑side on tablet if space allows */
+            #game-display-container {
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 25px !important;
+            }
+
+            .game-left-panel,
+            #graph-container {
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+
+            /* 7) About panel positioning */
+            #project-about-dropdown {
+                right: 16px !important;
+                left: 16px !important;
+                width: auto !important;
+                max-width: 400px !important;
+            }
+        }
+
+        /* --- Mobile: shrink even further & tighten spacing --- */
+        @media (max-width: 480px) {
+
+            /* Mini matchboxes – smallest comfortable size */
+            table.board:not(.large) {
+                border-spacing: 3px !important;
+                padding: 3px !important;
+                border-radius: 8px !important;
+            }
+
+            table.board:not(.large) td {
+                width: 18px !important;
+                height: 18px !important;
+                font-size: 8px !important;
+                border-radius: 4px !important;
+            }
+
+            .moves tbody tr {
+                gap: 4px !important;
+                padding: 3px 0 !important;
+            }
+
+            /* Grid cells – tighter padding */
+            .grid-matchbox-cell {
+                padding: 10px !important;
+            }
+
+            .grid-matchbox-cell h4 {
+                font-size: 12px !important;
+            }
+
+            .grid-matchbox-cell p {
+                font-size: 11px !important;
+                margin-bottom: 8px !important;
+            }
+
+            /* Game board cells adjust to small screens */
+            table.board.large {
+                border-spacing: 6px !important;
+            }
+
+            table.board.large td {
+                width: 56px !important;
+                height: 56px !important;
+                font-size: 24px !important;
+                border-radius: 12px !important;
+            }
+
+            /* Score displays smaller */
+            .dis {
+                font-size: 20px !important;
+            }
+            .wins {
+                font-size: 10px !important;
+            }
+
+            /* Graph container padding */
+            #graph-container {
+                padding: 14px !important;
+            }
+
+            #graph-container canvas {
+                max-width: 100% !important;
+                height: auto !important;
+            }
+
+            /* About panel */
+            #project-about-dropdown {
+                top: 60px !important;
+                right: 10px !important;
+                left: 10px !important;
+                width: auto !important;
+                max-width: 100% !important;
+            }
+
+            .dropdown-body-content {
+                padding: 16px !important;
+                max-height: 350px !important;
+            }
+
+            .dropdown-header h3 {
+                font-size: 14px !important;
+            }
+
+            /* Players panel */
+            .players {
+                padding: 14px !important;
+                font-size: 12px !important;
+            }
+
+            .mode-btn {
+                padding: 8px 12px !important;
+                font-size: 12px !important;
+            }
+
+            /* Board interface padding */
+            #board-interface {
+                padding: 14px !important;
+            }
+
+            /* Instruction card */
+            .engine-instructions-card {
+                padding: 12px 14px !important;
+                margin-top: 14px !important;
+            }
+            .ins-step p {
+                font-size: 11px !important;
+            }
+            .ins-step h5 {
+                font-size: 11px !important;
+            }
+
+            /* Footer */
+            .portfolio-footer {
+                padding: 20px 12px !important;
+                margin-top: 40px !important;
+            }
+            .footer-links a {
+                font-size: 11px !important;
+                padding: 6px 12px !important;
+            }
+
+            /* Loading screen */
+            .loading-glass-card {
+                padding: 24px 18px !important;
+                max-width: 320px !important;
+            }
+            .inventor-avatar-frame {
+                width: 90px !important;
+                height: 90px !important;
+            }
+            .loading-glass-card h2 {
+                font-size: 17px !important;
+            }
+            .loading-description {
+                font-size: 12px !important;
+            }
+
+            /* Top nav button */
+            #about-toggle-btn {
+                font-size: 12px !important;
+                padding: 8px 14px !important;
+            }
+
+            /* Glass scroll button */
+            .glass-scroll-btn {
+                font-size: 12px !important;
+                padding: 8px 18px !important;
+            }
+        }
+
+        /* --- Extra‑small phones (≤ 380px) --- */
+        @media (max-width: 380px) {
+            table.board:not(.large) td {
+                width: 15px !important;
+                height: 15px !important;
+                font-size: 7px !important;
+                border-radius: 3px !important;
+            }
+            table.board:not(.large) {
+                border-spacing: 2px !important;
+                padding: 2px !important;
+            }
+            .moves tbody tr {
+                gap: 3px !important;
+            }
+            table.board.large td {
+                width: 44px !important;
+                height: 44px !important;
+                font-size: 20px !important;
+                border-radius: 10px !important;
+            }
+            table.board.large {
+                border-spacing: 4px !important;
+            }
+        }
+
+        /* --- Ensure all containers respect viewport width --- */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        /* Force any rogue element to not exceed viewport */
+        #game-display-container,
+        #brain-visualizer-table,
+        .menace_side,
+        #_1_moves,
+        #_1_tweak_s,
+        .matchbox-grid-wrapper,
+        .grid-matchbox-cell,
+        .moves,
+        .moves tbody,
+        .moves tbody tr,
+        .moves tbody tr td.board,
+        .moves tbody tr td.board center,
+        .moves tbody tr td.board table {
+            max-width: 100% !important;
+        }
+
+        /* Keep the outer brain wrapper from overflowing */
+        #_1_tweak_s {
+            display: block !important;
+            width: 100% !important;
+            overflow: hidden !important;
+            padding: 0 4px !important;
+        }
+
+        .menace_side {
+            display: block !important;
+            width: 100% !important;
+            overflow: hidden !important;
+        }
+
+        /* The grid wrapper itself */
+        .matchbox-grid-wrapper {
+            display: grid !important;
+            width: 100% !important;
+        }
+
+        /* Fix center tags inside matchbox cells */
+        .grid-matchbox-cell center {
+            display: block !important;
+            max-width: 100% !important;
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+        }
+
+        /* Ensure the matchbox inner tables don't force width */
+        .grid-matchbox-cell table.board {
+            max-width: 100% !important;
+            table-layout: fixed !important;
+        }
+
+        .grid-matchbox-cell table.board td {
+            word-break: break-all !important;
+        }
+
+        /* The "MENACE TABLE MATRIX" heading */
+        #_1_tweak_s center {
+            display: block !important;
+            max-width: 100% !important;
+            padding: 0 8px !important;
+            font-size: inherit !important;
+            word-wrap: break-word !important;
+        }
+
+        /* Keep the matchbox boards from spilling out of their card */
+        .grid-matchbox-cell {
+            overflow: hidden !important;
+            word-wrap: break-word !important;
+        }
+
+        /* Preserve the glass effect on all screens */
+        .players,
+        #board-interface,
+        #graph-container,
+        .grid-matchbox-cell,
+        #project-about-dropdown {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(16px) saturate(120%);
+            -webkit-backdrop-filter: blur(16px) saturate(120%);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06);
+        }
+
+        /* Small screens: reduce border-radius on cards for cleaner edges */
+        @media (max-width: 480px) {
+            .players,
+            #board-interface,
+            #graph-container,
+            .grid-matchbox-cell,
+            #project-about-dropdown {
+                border-radius: 16px !important;
+            }
+        }
+/* ==========================================================================
+   PREMIUM LIQUID GLASS IDENTITY HEADER (SMART STICKY WITH LINKS)
+   ========================================================================== */
+#top-nav-header {
+    position: sticky;       
+    top: 15px;              
+    width: calc(100% - 40px);    
+    max-width: 1100px;
+    margin: 15px auto 0 auto; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 12px 24px;
+    box-sizing: border-box;
+    z-index: 2000;          
+    
+    /* Premium Glassmorphic Architecture */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px; 
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+}
+
+/* Combines brand info and links into a horizontal grouping row */
+.header-left-zone {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+/* Developer Details Branding */
+.header-branding {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.header-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1e293b;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+
+.header-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* Embedded Micro Glass Link Icons */
+.header-links {
+    display: flex;
+    gap: 10px;
+}
+
+.header-links a {
+    color: #475569;
+    text-decoration: none;
+    font-size: 16px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px; /* Mini squircle layout profiles */
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-links a:hover {
+    background: #ffffff;
+    border-color: #0284c7;
+    color: #0284c7;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(2, 132, 199, 0.1);
+}
+
+/* Glass Interactive Action Trigger Button */
+#about-toggle-btn {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: #0284c7;
+    padding: 10px 18px;
+    border-radius: 14px; 
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#about-toggle-btn:hover {
+    background: #ffffff;
+    border-color: #0284c7;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.1);
+}
+
+/* ==========================================================================
+   MOBILE & TABLET BREAKPOINTS FOR THE INFUSED HEADER
+   ========================================================================== */
+@media (max-width: 600px) {
+    .header-left-zone {
+        gap: 12px;
+    }
+    .header-title {
+        display: none; /* Auto-hides secondary subtitle text to preserve clean layouts */
+    }
+}
+
+@media (max-width: 480px) {
+    #top-nav-header {
+        padding: 10px 14px;
+        top: 10px;
+        margin: 10px auto 0 auto;
+        width: calc(100% - 24px);
+    }
+    
+    .header-name { font-size: 13px; }
+    .header-links a {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+    #about-toggle-btn { padding: 8px 12px; font-size: 11px; }
+    
+    #project-about-dropdown {
+        top: 80px;
+    }
+}
